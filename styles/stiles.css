@@ -1,0 +1,114 @@
+.contenedor{
+    margin:auto;
+    padding-top: 1px;
+    width: 800px;
+    height: 720px;
+    background-color: black;
+}
+@media screen and (max-width: 800px) and (min-width: 541px) {
+    .contenedor{
+        width: 540px;
+        height: 420px;
+    }
+}
+@media screen and (max-width: 540px) {
+    .contenedor{
+        width: 320px;
+        height: 280px;
+    }
+}
+.section {
+    display: flex;
+    background-color: bisque;
+    margin: 5% 10%;
+}
+.puntaje{
+
+    height: 20%;
+}
+.juego{
+    height: 60%;
+
+}
+.buttons{
+    padding: 2%;
+    width: 30%;
+}
+.average{
+    padding: 2%;
+    width: 70%;
+    display: flex;
+}
+
+.average div {
+    margin: auto;
+    width: 33%;
+    height: 100%;
+}
+
+.average div p{
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+.score {
+    height: 70%;
+    font-size: 80px;
+    margin-top: -10px !important;
+}
+.player {
+    height: 30%;
+    padding-top: 6%;
+    font-size: 30px;
+}
+@media screen and (max-width: 800px) and (min-width: 541px) {
+    .score {
+        font-size: 50px;
+    }
+    .player {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 540px) {
+    .score {
+        font-size: 30px;
+        margin-top: -5px !important;
+    }
+    .player {
+        font-size: 14px;
+    }
+}
+.tablero{
+    margin: auto;
+    width: 420px;
+    height: 420px;
+    background-color: black;
+}
+.tablero div{
+    display: flex;
+}
+.position{
+    border-radius: 10px;
+    width: 140px;
+    height: 140px;
+}
+@media screen and (max-width: 800px) and (min-width: 541px) {
+    .tablero{
+        width: 252px;
+        height: 252px;
+    }
+    .position{
+        width: 84px;
+        height: 84px;
+    }
+}
+@media screen and (max-width: 540px) {
+    .tablero{
+        width: 168px;
+        height: 168px;
+    }
+    .position{
+        width: 56px;
+        height: 56px;
+    }
+}
