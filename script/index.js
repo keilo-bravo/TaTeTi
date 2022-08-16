@@ -27,19 +27,16 @@ function Accion() {
 }
 
 function vsPlayer() {
-    document.addEventListener( "click",function (ckl) {
-        const jugada = ckl.target.id;
-        const boton = document.getElementById(`${jugada}`)
-        const writeArea = boton.firstElementChild
-        if (writeArea.textContent === "X" && Player.turn === "O") {
-            writeArea.textContent = "X"
-        } else if (writeArea.textContent === "O" && Player.turn === "X") {
-    
-            writeArea.textContent = "O"
-        } else {
-            writeArea.textContent = Player.turn
-            tablero[Player.turn].push(jugada)
-            verify()
+    document.addEventListener( "click",function (clk) {
+        const jugada = clk.target.id;
+        if (jugada!==undefined&&jugada[0]==='P'){
+            const writeArea = document.getElementById(`${jugada}`).firstElementChild
+            const jugadas = tablero.X.concat(tablero.O)
+            if (!jugadas.includes(jugada)) {
+                writeArea.textContent = Player.turn
+                tablero[Player.turn].push(jugada)
+                verify()
+            }
         }
     })
 }
@@ -62,8 +59,8 @@ function vsCom() {
 function comFacil() {
     let x=Math.floor(Math.random()*(3-0)+0)
     let y=Math.floor(Math.random()*(3-0)+0)
-    let tab = tablero.X.concat(tablero.O)
-    if (tab.includes(`P${y}-${x}`)) {
+    const jugadas = tablero.X.concat(tablero.O)
+    if (jugadas.includes(`P${y}-${x}`)) {
         comFacil()
     }
     else{
@@ -83,10 +80,12 @@ function verify() {
         ++Pts[Player.turn]
         document.getElementById(`${Player.turn}`).textContent=Pts[Player.turn]
         alert(` Ganador ${Player.turn} `)
+        tableroDisable()
     }else if (empate()) {
         ++Pts.E
         document.getElementById(`${"E"}`).textContent=Pts.E
         alert(` Empate `)
+        tableroDisable()
     }else {
         if (Player.turn==="X") {
             Player.turn="O"
@@ -125,7 +124,7 @@ function winFila(Win) {
     }
     return winCol(Win)
 }
-function winCol(Win) {
+function winCol(Win) { 
     for (let i = 0; i < 3; i++) {
         let colWin = []
         for (let j = 0; j < Win.length; j++) {
@@ -146,4 +145,25 @@ function winCruz(Win) {
         return true
     }
     return false
+}
+function tableroDisable() {
+    for (let i = 0; i < 3; i++) {        
+        for (let j = 0; j < 3; j++) {
+            document.getElementById(`P${i}-${j}`).setAttribute("disabled","disabled")
+        }
+    }
+}
+function newGame() {
+    const tabla = []
+    for (let i = 0; i < 3; i++) {        
+        for (let j = 0; j < 3; j++) {
+            tabla.push(document.getElementById(`P${i}-${j}`))
+        }
+    }
+    tabla.forEach(e=>{
+        e.removeAttribute("disabled")
+        e.firstElementChild.textContent = ''
+        tablero.O.length=0
+        tablero.X.length=0
+    })
 }
