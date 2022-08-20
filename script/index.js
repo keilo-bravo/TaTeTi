@@ -121,7 +121,8 @@ function comMedio() {
         // verificar jugadas del contrincante
         // si tiene 2 en fila bolquear
         // sino tratar de poner 3 en fila
-        let comJ = block(jugadasProx,0)
+
+        const comJ = block(jugadasProx,0)
         document.getElementById(`${comJ}`).firstElementChild.textContent=Player.turn
         tablero[Player.turn].push(`${comJ}`)
         verify()
@@ -274,7 +275,7 @@ function block(tVacio,n) {
             if (typeof(x)==='number'){
                 let j = 2
                 for (let i = 0; i < 3; i++) {
-                    if (!play.includes(`P${j}-${i}`)) {
+                    if ((!play.includes(`P${j}-${i}`))&&(!tab.includes(`P${j}-${i}`))) {
                         aux2.push(`P${j}-${i}`)
                     }
                     --j
@@ -286,7 +287,7 @@ function block(tVacio,n) {
         case 7:
             if (typeof(x)==='number'){
                 for (let i = 0; i < 3; i++) {
-                    if (!play.includes(`P${i}-${i}`)) {
+                    if ((!play.includes(`P${i}-${i}`))&&(!tab.includes(`P${i}-${i}`))) {
                         aux2.push(`P${i}-${i}`)
                     }
                 }
@@ -302,15 +303,16 @@ function block(tVacio,n) {
             }
             break;
     }
-    if ((aux2.length>1&&tVacio.length>1)||aux2.includes(false)) {
+    if ((aux2.length>1&&tVacio.length>1)||aux2.includes(false)||aux2.length===0) {
         return block(tVacio,n+1)       
+    }else{
+        return aux2[0]
     }
-    return aux2[0]
 }
 function comToWin() {
     const tabCom = tablero[Player.turn]
     const tableroV =tableroVacio(tablero.O.concat(tablero.X))
-    const num = Math.floor(Math.random()*(tableroV.length-0)+0)
+    let num = Math.floor(Math.random()*(tableroV.length-0)+0)
     for (let i = 0; i < 24; i++) {
         const j1 = Jugadas[i][0]
         const j2 = Jugadas[i][1]
