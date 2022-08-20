@@ -10,8 +10,8 @@ const dificultad = {
 }
 const Player = {
     "turn":"X",
-    "player":"O",
-    "com": "X"
+    "player":"X",
+    "com": "O"
 }
 const Pts = {
     "X":0,
@@ -46,11 +46,40 @@ const Jugadas = {
 }
 function select() {
     const opcion = document.getElementById("select").value
+    const rBttn1 = document.getElementById("Radio1")
+    const rBttn2 = document.getElementById("Radio2")
+    //.removeAttribute("disabled")
     for (let i in dificultad) {
         dificultad[i]=false
     }
     dificultad[opcion] = true
     Player.turn='X'
+    newGame()
+    if(opcion!=="vs_player"){
+        rBttn1.removeAttribute("disabled")
+        rBttn2.removeAttribute("disabled")
+    }
+    else{
+        rBttn1.setAttribute("disabled","disabled")
+        rBttn2.setAttribute("disabled","disabled")
+    }
+}
+function opcionS(id) {
+    console.log('----------------');
+    const rBttn1 = document.getElementById("Radio1")
+    const rBttn2 = document.getElementById("Radio2")
+    console.log(Player,'player??');
+    if (id==="Radio1") {
+        rBttn1.checked = true
+        rBttn2.checked = false
+        Player.player=rBttn1.value
+        Player.com=rBttn2.value
+    }else{
+        rBttn2.checked = true
+        rBttn1.checked = false
+        Player.player=rBttn2.value
+        Player.com=rBttn1.value
+    }
     newGame()
 }
 function Accion() {
@@ -60,7 +89,6 @@ function Accion() {
         vsCom()
     }
 }
-
 function vsPlayer() {
     document.addEventListener( "click",function (clk) {
         const jugada = clk.target.id;

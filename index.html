@@ -19,15 +19,15 @@
                     <option value="medio">Medio</option>
                     <option value="dificil">Dificil</option>
                 </select>
-                <div>
+                <div class="radiobuttons">
                     <div >
-                        <input type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                        <input type="radio" onchange="opcionS(this.id)" id="Radio1" value="X" checked disabled>
                         <label>
                           X
                         </label>
                     </div>
                     <div >
-                        <input type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                        <input type="radio" onchange="opcionS(this.id)" id="Radio2" value="O" disabled>
                         <label>
                           O
                         </label>
