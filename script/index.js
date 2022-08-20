@@ -65,10 +65,8 @@ function select() {
     }
 }
 function opcionS(id) {
-    console.log('----------------');
     const rBttn1 = document.getElementById("Radio1")
     const rBttn2 = document.getElementById("Radio2")
-    console.log(Player,'player??');
     if (id==="Radio1") {
         rBttn1.checked = true
         rBttn2.checked = false
