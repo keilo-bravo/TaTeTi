@@ -10,8 +10,8 @@ const dificultad = {
 }
 const Player = {
     "turn":"X",
-    "player":"X",
-    "com": "O"
+    "player":"O",
+    "com": "X"
 }
 const Pts = {
     "X":0,
@@ -144,12 +144,12 @@ function verify() {
     }else {
         if (Player.turn==="X") {
             Player.turn="O"
-            if (!dificultad.vs_player&&Player.com===Player.turn) {
+            if (!dificultad.vs_player) {
                 vsCom()
             }
         } else {
             Player.turn="X"
-            if (!dificultad.vs_player&&Player.com===Player.turn) {
+            if (!dificultad.vs_player) {
                 vsCom()
             }
         }
