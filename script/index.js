@@ -49,6 +49,9 @@ function select() {
     const rBttn1 = document.getElementById("Radio1")
     const rBttn2 = document.getElementById("Radio2")
     //.removeAttribute("disabled")
+    Pts.E=0
+    Pts.O=0
+    Pts.X=0
     for (let i in dificultad) {
         dificultad[i]=false
     }
@@ -67,6 +70,9 @@ function select() {
 function opcionS(id) {
     const rBttn1 = document.getElementById("Radio1")
     const rBttn2 = document.getElementById("Radio2")
+    Pts.E=0
+    Pts.O=0
+    Pts.X=0
     if (id==="Radio1") {
         rBttn1.checked = true
         rBttn2.checked = false
@@ -95,6 +101,7 @@ function vsPlayer() {
             const jugadas = tablero.X.concat(tablero.O)
             if (!jugadas.includes(jugada)) {
                 writeArea.textContent = Player.turn
+                writeArea.classList.add(`${Player.turn==="X"?"rojosX":"verdesO"}`)
                 tablero[Player.turn].push(jugada)
                 verify()
             }
@@ -125,7 +132,9 @@ function comFacil() {
         comFacil()
     }
     else{
-        document.getElementById(`P${y}-${x}`).firstElementChild.textContent=Player.turn
+        let writeArea = document.getElementById(`P${y}-${x}`).firstElementChild
+        writeArea.textContent=Player.turn
+        writeArea.classList.add(`${Player.turn==="X"?"rojosX":"verdesO"}`)
         tablero[Player.turn].push(`P${y}-${x}`)
         verify()
     }
@@ -139,7 +148,9 @@ function comMedio() {
         if (jugadas.includes(`P${y}-${x}`)) {
             comMedio()
         }   else{
-            document.getElementById(`P${y}-${x}`).firstElementChild.textContent=Player.turn
+            let writeArea = document.getElementById(`P${y}-${x}`).firstElementChild
+            writeArea.textContent=Player.turn
+            writeArea.classList.add(`${Player.turn==="X"?"rojosX":"verdesO"}`)
             tablero[Player.turn].push(`P${y}-${x}`)
             verify()
         }
@@ -149,7 +160,9 @@ function comMedio() {
         // sino tratar de poner 3 en fila
 
         const comJ = block(jugadasProx,0)
-        document.getElementById(`${comJ}`).firstElementChild.textContent=Player.turn
+        let writeArea = document.getElementById(`${comJ}`).firstElementChild
+        writeArea.textContent=Player.turn
+        writeArea.classList.add(`${Player.turn==="X"?"rojosX":"verdesO"}`)
         tablero[Player.turn].push(`${comJ}`)
         verify()
     }
@@ -351,17 +364,34 @@ function comToWin() {
 }
 function newGame() {
     const tabla = []
+    const rojos = []
+    const verdes = []
+    
     for (let i = 0; i < 3; i++) {        
         for (let j = 0; j < 3; j++) {
-            tabla.push(document.getElementById(`P${i}-${j}`))
+            let bttn = document.getElementById(`P${i}-${j}`)
+            tabla.push(bttn)
+            rojos.push(bttn.getElementsByClassName("rojosX"))
+            verdes.push(bttn.getElementsByClassName("verdesO"))
+        }
+    }
+    for (let i = 0; i < rojos.length; i++) {
+        if (rojos[i].length!==0) {
+            rojos[i][0].textContent = ''
+            rojos[i][0].classList.remove("rojosX");
+        }
+    }
+    for (let i = 0; i < verdes.length; i++) {
+        if (verdes[i].length!==0) {
+            verdes[i][0].textContent = ''
+            verdes[i][0].classList.remove("verdesO");
         }
     }
     tabla.forEach(e=>{
         e.removeAttribute("disabled")
-        e.firstElementChild.textContent = ''
-        tablero.O=[]
-        tablero.X=[]
     })
+    tablero.O=[]
+    tablero.X=[]
     Player.turn='X'
     Accion()
 }
