@@ -1,9 +1,12 @@
+body{
+    background-color: black;
+}
+
 .contenedor{
     margin:auto;
     padding-top: 1px;
     width: 800px;
     height: 720px;
-    background-color: black;
 }
 @media screen and (max-width: 800px) and (min-width: 541px) {
     .contenedor{
@@ -18,17 +21,18 @@
     }
 }
 .section {
+    background-color: black;
     display: flex;
-    background-color: bisque;
     margin: 5% 10%;
+    border-radius: 10px;
 }
 .puntaje{
-
+    background-color: rgba(195, 226, 246, 0.608);
     height: 20%;
 }
 .juego{
+    background-color: rgba(96, 127, 250, 0.368);
     height: 60%;
-
 }
 .buttons{
     padding: 2%;
@@ -51,9 +55,13 @@
     margin: auto;
     text-align: center;
 }
+span{
+    font-size: 60px;
+    text-shadow: 4px 5px  rgba(96, 103, 110, 0.671);
+}
 .score {
     height: 70%;
-    font-size: 80px;
+    font-size: 60px;
     margin-top: 0px !important;
     text-shadow: 0.07em 0.07em rgba(110, 122, 134, 0.633);
 }
@@ -76,26 +84,36 @@ p, span {
 }
 @media screen and (max-width: 800px) and (min-width: 541px) {
     .score {
-        font-size: 50px;
+        font-size: 40px;
     }
     .player {
         font-size: 20px;
     }
+    span{
+        font-size: 50px;
+    }
 }
 @media screen and (max-width: 540px) {
     .score {
-        font-size: 30px;
+        font-size: 20px;
         margin-top: 0px !important;
     }
     .player {
         font-size: 14px;
+    }
+    span{
+        font-size: 30px;
+    }
+    .average{
+        margin: auto;
+        width: 50%;
     }
 }
 .tablero{
     margin: auto;
     width: 420px;
     height: 420px;
-    background-color: black;
+    
 }
 .tablero div{
     display: flex;
