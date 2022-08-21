@@ -48,7 +48,6 @@ function select() {
     const opcion = document.getElementById("select").value
     const rBttn1 = document.getElementById("Radio1")
     const rBttn2 = document.getElementById("Radio2")
-    //.removeAttribute("disabled")
     Pts.E=0
     Pts.O=0
     Pts.X=0
@@ -167,7 +166,7 @@ function comMedio() {
         verify()
     }
 }
-function comDificil(writeArea, jugada) {
+function comDificil() {
 
 }
 function verify() {
@@ -311,27 +310,33 @@ function block(tVacio,n) {
             }
             break;
         case 6:
-            if (typeof(x)==='number'){
+            if (!typeof(x)==='number'){
+                aux2.push(x)
+            }else{
                 let j = 2
                 for (let i = 0; i < 3; i++) {
+                    if (!play.includes(`P${j}-${i}`)&&(tab.includes(`P${j}-${i}`))) {
+                        aux2.push(false)//aux[i]
+                    }
                     if ((!play.includes(`P${j}-${i}`))&&(!tab.includes(`P${j}-${i}`))) {
                         aux2.push(`P${j}-${i}`)
                     }
                     --j
                 }
-            }else{
-                aux2.push(x)
             }
             break;
         case 7:
-            if (typeof(x)==='number'){
+            if (!typeof(x)==='number'){
+                aux2.push(x)
+            }else{
                 for (let i = 0; i < 3; i++) {
+                    if ((!play.includes(`P${i}-${i}`))&&(tab.includes(`P${i}-${i}`))) {
+                        aux2.push(false)
+                    }
                     if ((!play.includes(`P${i}-${i}`))&&(!tab.includes(`P${i}-${i}`))) {
                         aux2.push(`P${i}-${i}`)
                     }
                 }
-            }else{
-                aux2.push(x)
             }
             break;
         default:
