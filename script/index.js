@@ -48,6 +48,11 @@ function select() {
     const opcion = document.getElementById("select").value
     const rBttn1 = document.getElementById("Radio1")
     const rBttn2 = document.getElementById("Radio2")
+    const average = document.getElementsByClassName("score")
+    for (const e in average) {
+        average[e].textContent = '0';
+    }
+    console.log(average, "a ver??");
     Pts.E=0
     Pts.O=0
     Pts.X=0
