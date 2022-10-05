@@ -1,48 +1,50 @@
-const tablero = {
-    "X":[],
-    "O":[]
-}
-const dificultad = {
-    "vs_player":true,
-    "facil":false,
-    "medio":false,
-    "dificil":false
-}
-const Player = {
-    "turn":"X",
-    "player":"X",
-    "com": "O"
-}
-const Pts = {
-    "X":0,
-    "E":0,
-    "O":0
-}
-const Jugadas = {
-    "0":['P0-0','P0-1','P0-2'],
-    "1":['P0-0','P0-2','P0-1'],
-    "2":['P0-1','P0-2','P0-0'],
-    "3":['P1-0','P1-1','P1-2'],
-    "4":['P1-0','P1-2','P1-1'],
-    "5":['P1-1','P1-2','P1-0'],
-    "6":['P2-0','P2-1','P2-2'],
-    "7":['P2-0','P2-2','P2-1'],
-    "8":['P2-1','P2-2','P2-0'],
-    "9":['P0-0','P1-0','P2-0'],
-    "10":['P0-0','P2-0','P1-0'],
-    "11":['P1-0','P2-0','P0-0'],
-    "12":['P0-1','P1-1','P2-1'],
-    "13":['P0-1','P2-1','P1-1'],
-    "14":['P1-1','P2-1','P0-1'],
-    "15":['P0-2','P1-2','P2-2'],
-    "16":['P0-2','P2-2','P1-2'],
-    "17":['P1-2','P2-2','P0-2'],
-    "18":['P0-0','P1-1','P2-2'],
-    "19":['P0-0','P2-2','P1-1'],
-    "20":['P1-1','P2-2','P0-0'],
-    "21":['P2-0','P1-1','P0-2'],
-    "22":['P2-0','P0-2','P1-1'],
-    "23":['P1-1','P0-2','P2-0']
+const Game = {
+    "Tablero" : {
+        "X":[],
+        "O":[]
+    },
+    "Dificultad" : {
+        "vs_player":true,
+        "facil":false,
+        "medio":false,
+        "dificil":false
+    },
+    "Player" : {
+        "turn":"X",
+        "player":"X",
+        "com": "O"
+    },
+    "Pts" : {
+        "X":0,
+        "E":0,
+        "O":0
+    },
+    "Jugadas" : {
+        "0":['P0-0','P0-1','P0-2'],
+        "1":['P0-0','P0-2','P0-1'],
+        "2":['P0-1','P0-2','P0-0'],
+        "3":['P1-0','P1-1','P1-2'],
+        "4":['P1-0','P1-2','P1-1'],
+        "5":['P1-1','P1-2','P1-0'],
+        "6":['P2-0','P2-1','P2-2'],
+        "7":['P2-0','P2-2','P2-1'],
+        "8":['P2-1','P2-2','P2-0'],
+        "9":['P0-0','P1-0','P2-0'],
+        "10":['P0-0','P2-0','P1-0'],
+        "11":['P1-0','P2-0','P0-0'],
+        "12":['P0-1','P1-1','P2-1'],
+        "13":['P0-1','P2-1','P1-1'],
+        "14":['P1-1','P2-1','P0-1'],
+        "15":['P0-2','P1-2','P2-2'],
+        "16":['P0-2','P2-2','P1-2'],
+        "17":['P1-2','P2-2','P0-2'],
+        "18":['P0-0','P1-1','P2-2'],
+        "19":['P0-0','P2-2','P1-1'],
+        "20":['P1-1','P2-2','P0-0'],
+        "21":['P2-0','P1-1','P0-2'],
+        "22":['P2-0','P0-2','P1-1'],
+        "23":['P1-1','P0-2','P2-0']
+    }
 }
 function select() {
     const opcion = document.getElementById("select").value
@@ -53,14 +55,14 @@ function select() {
         average[e].textContent = '0';
     }
     console.log(average, "a ver??");
-    Pts.E=0
-    Pts.O=0
-    Pts.X=0
-    for (let i in dificultad) {
-        dificultad[i]=false
+    Game.Pts.E=0
+    Game.Pts.O=0
+    Game.Pts.X=0
+    for (let i in Game.Dificultad) {
+        Game.Dificultad[i]=false
     }
-    dificultad[opcion] = true
-    Player.turn='X'
+    Game.Dificultad[opcion] = true
+    Game.Player.turn='X'
     newGame()
     if(opcion!=="vs_player"){
         rBttn1.removeAttribute("disabled")
@@ -74,24 +76,24 @@ function select() {
 function opcionS(id) {
     const rBttn1 = document.getElementById("Radio1")
     const rBttn2 = document.getElementById("Radio2")
-    Pts.E=0
-    Pts.O=0
-    Pts.X=0
+    Game.Pts.E=0
+    Game.Pts.O=0
+    Game.Pts.X=0
     if (id==="Radio1") {
         rBttn1.checked = true
         rBttn2.checked = false
-        Player.player=rBttn1.value
-        Player.com=rBttn2.value
+        Game.Player.player=rBttn1.value
+        Game.Player.com=rBttn2.value
     }else{
         rBttn2.checked = true
         rBttn1.checked = false
-        Player.player=rBttn2.value
-        Player.com=rBttn1.value
+        Game.Player.player=rBttn2.value
+        Game.Player.com=rBttn1.value
     }
     newGame()
 }
 function Accion() {
-    if (dificultad.vs_player) {
+    if (Game.Dificultad.vs_player) {
         vsPlayer()
     } else {
         vsCom()
@@ -102,28 +104,28 @@ function vsPlayer() {
         const jugada = clk.target.id;
         if (jugada!==undefined&&jugada[0]==='P'){
             const writeArea = document.getElementById(`${jugada}`).firstElementChild
-            const jugadas = tablero.X.concat(tablero.O)
+            const jugadas = Game.Tablero.X.concat(Game.Tablero.O)
             if (!jugadas.includes(jugada)) {
-                writeArea.textContent = Player.turn
-                writeArea.classList.add(`${Player.turn==="X"?"rojosX":"verdesO"}`)
-                tablero[Player.turn].push(jugada)
+                writeArea.textContent = Game.Player.turn
+                writeArea.classList.add(`${Game.Player.turn==="X"?"rojosX":"verdesO"}`)
+                Game.Tablero[Game.Player.turn].push(jugada)
                 verify()
             }
         }
     })
 }
 function vsCom() {
-    if (Player.turn===Player.player) {
+    if (Game.Player.turn===Game.Player.player) {
         vsPlayer()
     }
     else{
-        if (dificultad.facil) {
+        if (Game.Dificultad.facil) {
             comFacil()
         }
-        if (dificultad.medio) {
+        if (Game.Dificultad.medio) {
             comMedio()
         }
-        if (dificultad.dificil) {
+        if (Game.Dificultad.dificil) {
             comDificil()
         }
     }
@@ -131,31 +133,31 @@ function vsCom() {
 function comFacil() {
     let x=Math.floor(Math.random()*(3-0)+0)
     let y=Math.floor(Math.random()*(3-0)+0)
-    const jugadas = tablero.X.concat(tablero.O)
+    const jugadas = Game.Tablero.X.concat(Game.Tablero.O)
     if (jugadas.includes(`P${y}-${x}`)) {
         comFacil()
     }
     else{
         let writeArea = document.getElementById(`P${y}-${x}`).firstElementChild
-        writeArea.textContent=Player.turn
-        writeArea.classList.add(`${Player.turn==="X"?"rojosX":"verdesO"}`)
-        tablero[Player.turn].push(`P${y}-${x}`)
+        writeArea.textContent=Game.Player.turn
+        writeArea.classList.add(`${Game.Player.turn==="X"?"rojosX":"verdesO"}`)
+        Game.Tablero[Game.Player.turn].push(`P${y}-${x}`)
         verify()
     }
 }
 function comMedio() {
-    const jugadas = tablero.X.concat(tablero.O)
+    const jugadas = Game.Tablero.X.concat(Game.Tablero.O)
     const jugadasProx = tableroVacio(jugadas)
-    if (tablero[Player.turn].length===0) {
+    if (Game.Tablero[Game.Player.turn].length===0) {
         let x=Math.floor(Math.random()*(3-0)+0)
         let y=Math.floor(Math.random()*(3-0)+0)
         if (jugadas.includes(`P${y}-${x}`)) {
             comMedio()
         }   else{
             let writeArea = document.getElementById(`P${y}-${x}`).firstElementChild
-            writeArea.textContent=Player.turn
-            writeArea.classList.add(`${Player.turn==="X"?"rojosX":"verdesO"}`)
-            tablero[Player.turn].push(`P${y}-${x}`)
+            writeArea.textContent=Game.Player.turn
+            writeArea.classList.add(`${Game.Player.turn==="X"?"rojosX":"verdesO"}`)
+            Game.Tablero[Game.Player.turn].push(`P${y}-${x}`)
             verify()
         }
     }   else{
@@ -165,9 +167,9 @@ function comMedio() {
 
         const comJ = block(jugadasProx,0)
         let writeArea = document.getElementById(`${comJ}`).firstElementChild
-        writeArea.textContent=Player.turn
-        writeArea.classList.add(`${Player.turn==="X"?"rojosX":"verdesO"}`)
-        tablero[Player.turn].push(`${comJ}`)
+        writeArea.textContent=Game.Player.turn
+        writeArea.classList.add(`${Game.Player.turn==="X"?"rojosX":"verdesO"}`)
+        Game.Tablero[Game.Player.turn].push(`${comJ}`)
         verify()
     }
 }
@@ -176,36 +178,36 @@ function comDificil() {
 }
 function verify() {
     if (winner()) {
-        ++Pts[Player.turn]
-        document.getElementById(`${Player.turn}`).textContent=Pts[Player.turn]
-        alert(` Ganador ${Player.turn} `)
+        ++Game.Pts[Game.Player.turn]
+        document.getElementById(`${Game.Player.turn}`).textContent=Game.Pts[Game.Player.turn]
+        alert(` Ganador ${Game.Player.turn} `)
         tableroDisable()
     }else if (empate()) {
-        ++Pts.E
-        document.getElementById(`${"E"}`).textContent=Pts.E
+        ++Game.Pts.E
+        document.getElementById(`${"E"}`).textContent=Game.Pts.E
         alert(` Empate `)
         tableroDisable()
     }else {
-        if (Player.turn==="X") {
-            Player.turn="O"
-            if (!dificultad.vs_player) {
+        if (Game.Player.turn==="X") {
+            Game.Player.turn="O"
+            if (!Game.Dificultad.vs_player) {
                 vsCom()
             }
         } else {
-            Player.turn="X"
-            if (!dificultad.vs_player) {
+            Game.Player.turn="X"
+            if (!Game.Dificultad.vs_player) {
                 vsCom()
             }
         }
     }
 }
 function winner() {
-    let Win = tablero[Player.turn]
+    let Win = Game.Tablero[Game.Player.turn]
     return winFila(Win)
 }
 function empate() {
     if(!winner()){
-        return tablero.X.length+tablero.O.length===9 ? true : false
+        return Game.Tablero.X.length+Game.Tablero.O.length===9 ? true : false
     }
     return false
 }
@@ -270,9 +272,9 @@ function tableroVacio(tablero) {
 function block(tVacio,n) {
     let aux = []
     let aux2 = []
-    const play = tablero[Player.player].sort()
-    const tab = tablero[Player.com].concat(tablero[Player.player]).sort()
-    const x = tablero[Player.player].length===1?1:comToWin()
+    const play = Game.Tablero[Game.Player.player].sort()
+    const tab = Game.Tablero[Game.Player.com].concat(Game.Tablero[Game.Player.player]).sort()
+    const x = Game.Tablero[Game.Player.player].length===1?1:comToWin()
     switch (n) {
         case 0:
         case 1:
@@ -359,13 +361,13 @@ function block(tVacio,n) {
     }
 }
 function comToWin() {
-    const tabCom = tablero[Player.turn]
-    const tableroV =tableroVacio(tablero.O.concat(tablero.X))
+    const tabCom = Game.Tablero[Game.Player.turn]
+    const tableroV =tableroVacio(Game.Tablero.O.concat(Game.Tablero.X))
     let num = Math.floor(Math.random()*(tableroV.length-0)+0)
     for (let i = 0; i < 24; i++) {
-        const j1 = Jugadas[i][0]
-        const j2 = Jugadas[i][1]
-        const j3 = Jugadas[i][2]
+        const j1 = Game.Jugadas[i][0]
+        const j2 = Game.Jugadas[i][1]
+        const j3 = Game.Jugadas[i][2]
         if ((tabCom.includes(j1))&&(tabCom.includes(j2))&&(tableroV.includes(j3))){
             return j3
         }
@@ -400,8 +402,8 @@ function newGame() {
     tabla.forEach(e=>{
         e.removeAttribute("disabled")
     })
-    tablero.O=[]
-    tablero.X=[]
-    Player.turn='X'
+    Game.Tablero.O=[]
+    Game.Tablero.X=[]
+    Game.Player.turn='X'
     Accion()
 }
