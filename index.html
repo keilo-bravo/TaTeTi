@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/stiles.css">
     <script src="./script/index.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>TaTeTi</title>
@@ -13,23 +13,25 @@
     <div class="contenedor">
         <section class="section puntaje">
             <div class="buttons">
-                <button onclick="newGame()">NEW GAME</button>
-                <select onchange="select()" id="select">
-                    <option value="vs_player" selected>vs Player 2</option>
-                    <option value="facil" >Facil</option>
-                    <option value="medio">Medio</option>
-                    <option value="dificil" disabled>Dificil</option>
-                </select>
+                <button onclick="newGame()" class='btnfos btnfos-3'>NEW GAME</button>
+                <div  class='slt'>
+                    <select onchange="select()"  class='sltfos' id="select">
+                        <option value="vs_player" selected  ="color:black;"><p>vs Player 2</p></option>
+                        <option value="Easy">Easy</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Hard">Hard</option>
+                    </select>
+                </div>
                 <div class="radiobuttons">
                     <div >
                         <input type="radio" onchange="opcionS(this.id)" id="Radio1" value="X" checked disabled>
-                        <label>
+                        <label class="option optionX">
                           X
                         </label>
                     </div>
                     <div >
                         <input type="radio" onchange="opcionS(this.id)" id="Radio2" value="O" disabled>
-                        <label>
+                        <label class="option optionO">
                           O
                         </label>
                     </div>
@@ -103,6 +105,13 @@
                         </button>
                     </div>
                 </div>
+            </div>
+        </section>
+        <section class="alerta">
+            <div>
+                <button onclick="cerrar()" class="close">x</button>
+                <h3></h3>
+                <p class="player"></p>
             </div>
         </section>
     </div>
