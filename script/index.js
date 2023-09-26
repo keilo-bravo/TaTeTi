@@ -587,6 +587,7 @@ function cerrar() {
     document.querySelector('.alerta').style.setProperty('visibility', 'hidden')
     document.querySelector('.sltfos').removeAttribute("disabled")
     document.querySelector('.btnfos').removeAttribute("disabled")
+    document.getElementsByClassName('alerta')[0].firstElementChild.lastElementChild.textContent = ''
 }
 function alerta(result, player) {
     document.querySelector('.alerta').style.setProperty('visibility', 'visible')
