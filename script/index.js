@@ -293,7 +293,7 @@ function verify() {
     }else if (empate()) {
         ++Pts.E
         document.getElementById(`${"E"}`).textContent=Pts.E
-        alerta(` Empate `)
+        alerta(` Empate `,"")
         tableroDisable()
     }else {
         if (Player.turn==="X") {
@@ -588,11 +588,13 @@ function cerrar() {
     document.querySelector('.sltfos').removeAttribute("disabled")
     document.querySelector('.btnfos').removeAttribute("disabled")
 }
-function alerta(result, player='') {
+function alerta(result, player) {
     document.querySelector('.alerta').style.setProperty('visibility', 'visible')
     document.getElementsByTagName('h3')[0].textContent = result
-    let opPly = document.getElementsByClassName('alerta')[0].firstElementChild.lastElementChild
-    player==''?'':opPly.textContent = player
-    opPly.classList.add(player==''?'':(player=='X'?'rojosX':'verdesO'))
-    opPly.classList.remove(player==''?'':(player=='X'?'verdesO':'rojosX'))
+    if (result!=` Empate `) {
+        let opPly = document.getElementsByClassName('alerta')[0].firstElementChild.lastElementChild
+        opPly.textContent = player
+        opPly.classList.add(player=='X'?'rojosX':'verdesO')
+        opPly.classList.remove(player=='X'?'verdesO':'rojosX')
+    }
 }
