@@ -267,14 +267,31 @@ function comDificil() {
             }
         }
         else if (jugadas.length===3) {
-            if ((tablero.X.includes('P0-2')&&tablero.X.includes('P2-0')) || (tablero.X.includes('P0-0')&&tablero.X.includes('P2-2'))){
-                const jugadasCom = {
-                    "0":'P0-1',
-                    "1":'P1-0',
-                    "2":'P1-2',
-                    "3":'P2-1',
+            let jugadasCom, toWin
+            if ((jugadas.includes('P0-0')&&jugadas.includes('P1-1')&&jugadas.includes('P2-2')) || (jugadas.includes('P0-2')&&jugadas.includes('P1-1')&&jugadas.includes('P2-0'))){    
+                if ((tablero.X.includes('P0-2')&&tablero.X.includes('P2-0')) || (tablero.X.includes('P0-0')&&tablero.X.includes('P2-2'))){
+                    jugadasCom = {
+                        "0":'P0-1',
+                        "1":'P1-0',
+                        "2":'P1-2',
+                        "3":'P2-1',
+                    }
+                    toWin=Math.floor(Math.random()*(4-0)+0)
                 }
-                let toWin=Math.floor(Math.random()*(4-0)+0)
+                else if ((tablero.X.includes('P2-2')&&tablero.X.includes('P1-1')) || (tablero.X.includes('P0-0')&&tablero.X.includes('P1-1'))){
+                    jugadasCom = {
+                        "0":'P0-2',
+                        "1":'P2-0',
+                    }
+                    toWin=Math.floor(Math.random()*(2-0)+0)
+                }
+                else if ((tablero.X.includes('P0-2')&&tablero.X.includes('P1-1')) || (tablero.X.includes('P2-0')&&tablero.X.includes('P1-1'))){
+                    jugadasCom = {
+                        "0":'P0-0',
+                        "1":'P2-2',
+                    }
+                    toWin=Math.floor(Math.random()*(2-0)+0)
+                }
                 let writeArea = document.getElementById(jugadasCom[toWin]).firstElementChild
                 writeArea.textContent=Player.turn
                 writeArea.classList.add(`${Player.turn==="X"?"rojosX":"verdesO"}`)
