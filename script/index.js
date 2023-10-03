@@ -2,7 +2,6 @@ const tablero = {
     "X": Array(0).fill(null),
     "O": Array(0).fill(null)
 }
-
 const dificultad = {
     "vs_player":true,
     "Easy":false,
@@ -217,13 +216,13 @@ function comDificil() {
             let vtw = verifyToWin()
             if (vtw[0]) {
                 const gameToWin = {
-                    "0":['P1-0', 'P2-0'],
+                    "0":['P0-1', 'P0-2'],
                     "1":['P0-0', 'P0-1'],
                     "2":['P0-2', 'P1-2'],
                     "3":['P2-1', 'P2-2'],
-                    "4":['P0-1', 'P0-2'],
+                    "4":['P1-0', 'P2-0'],
                     "5":['P1-2', 'P2-2'],
-                    "6":['P2-0', 'P2-1'],
+                    "6":['P2-1', 'P2-0'],
                     "7":['P0-0', 'P1-0']
                 }
                 let toWin=Math.floor(Math.random()*(2-0)+0)
@@ -232,7 +231,14 @@ function comDificil() {
                 writeArea.classList.add(`${Player.turn==="X"?"rojosX":"verdesO"}`)
                 tablero[Player.turn].push(gameToWin[vtw[1]-1][toWin])
             } else {
-                preblock(jugadasProx)
+                if (vtw.length>1) {
+                    let writeArea = document.getElementById(vtw[1]).firstElementChild
+                    writeArea.textContent=Player.turn
+                    writeArea.classList.add(`${Player.turn==="X"?"rojosX":"verdesO"}`)
+                    tablero[Player.turn].push(vtw[1])
+                } else {
+                    preblock(jugadasProx)
+                }
             }
         }
         else if (jugadas.length>4){
@@ -383,11 +389,11 @@ function tableroVacio(tablero) {
 function verifyToWin(){
     const jugadas = tablero.X.concat(tablero.O)
     const JugadasTabla = {
-        "0":['P0-0', 'P0-1', 'P1-1', 'P2-2'],
+        "0":['P0-0', 'P1-0', 'P1-1', 'P2-2'],
         "1":['P0-2', 'P1-2', 'P1-1', 'P2-0'],
         "2":['P2-2', 'P2-1', 'P1-1', 'P0,0'],
         "3":['P2-0', 'P1-0', 'P1-1', 'P0-2'],
-        "4":['P0-0', 'P1-0', 'P1-1', 'P2-2'],
+        "4":['P0-0', 'P0-1', 'P1-1', 'P2-2'],
         "5":['P0-1', 'P0-2', 'P1-1', 'P2-0'],
         "6":['P2-2', 'P1-2', 'P1-1', 'P0,0'],
         "7":['P2-0', 'P2-1', 'P1-1', 'P0-2']
@@ -408,31 +414,31 @@ function verifyToWin(){
         }
     }
     if (includesJugada!=0) {
-        switch (includesJugada) {
+        switch (includesJugada-1) {
             case 1:
-            case 5:
-                if ((tablero.O.includes('P0-2')&&tablero.O.includes('P1-2')) || (tablero.O.includes('P0-2')&&tablero.O.includes('P0-1'))){
-                    return [false]
-                }
-                return [true, includesJugada]
-            case 2:
-            case 6:
-                if ((tablero.O.includes('P2-1')&&tablero.O.includes('P2-2')) || (tablero.O.includes('P1-2')&&tablero.O.includes('P2-2'))) {
-                    return [false]
-                }
-                return [true, includesJugada]
-            case 3:
             case 7:
-                if ((tablero.O.includes('P1-0')&&tablero.O.includes('P2-0')) || (tablero.O.includes('P2-1')&&tablero.O.includes('P2-0'))){
-                    return [false]
-                }
-                return [true, includesJugada]
+                if ((tablero.O.includes('P0-2')&&tablero.O.includes('P1-2')) || (tablero.O.includes('P2-1')&&tablero.O.includes('P2-0'))){
+                        return [false, 'P2-2']
+                    }
+                    return [true, includesJugada]
+            case 3:
+            case 5:
+                if ((tablero.O.includes('P1-0')&&tablero.O.includes('P2-0')) || (tablero.O.includes('P0-2')&&tablero.O.includes('P0-1'))){    
+                        return [false, 'P0-0']
+                    }
+                    return [true, includesJugada]
             case 4:
+            case 6:
+                if ((tablero.O.includes('P0-0')&&tablero.O.includes('P0-1')) || (tablero.O.includes('P1-2')&&tablero.O.includes('P2-2'))) {
+                        return [false, 'P0-2']
+                    }
+                    return [true, includesJugada]
+            case 2:
             default:
-                if ((tablero.O.includes('P0-0')&&tablero.O.includes('P0-1')) || (tablero.O.includes('P0-0')&&tablero.O.includes('P1-0'))) {
-                    return [false]
-                }
-                return [true, includesJugada]
+                if ((tablero.O.includes('P0-0')&&tablero.O.includes('P1-0')) || (tablero.O.includes('P2-1')&&tablero.O.includes('P2-2'))) {
+                        return [false, 'P2-0']
+                    }
+                    return [true, includesJugada]
         }
     }
     return [false]
